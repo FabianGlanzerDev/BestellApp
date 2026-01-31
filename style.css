@@ -2,9 +2,8 @@ body {
     font-family: "Rubik", sans-serif;
 }
 
-/* ============================= */
+
 /* Header */
-/* ============================= */
 
 header {
     background-color: #FF8008;
@@ -44,9 +43,7 @@ header {
 }
 
 
-/* ============================= */
 /* Layout */
-/* ============================= */
 
 .content-wrapper {
     width: 100%;
@@ -60,16 +57,12 @@ header {
 .content-area {
     flex: 0 1 1440px;
     position: relative;
-
     overflow-y: auto;
-    /* NUR HIER scrollen */
     padding-bottom: 24px;
 }
 
 
-/* ============================= */
-/* Hero / Restaurant */
-/* ============================= */
+/* Restaurant */
 
 .image-first img {
     width: 100%;
@@ -107,9 +100,8 @@ header {
 }
 
 
-/* ============================= */
+
 /* Navigation */
-/* ============================= */
 
 .nav-bevor-dishes {
     display: flex;
@@ -143,9 +135,7 @@ header {
 }
 
 
-/* ============================= */
 /* Category Banner */
-/* ============================= */
 
 .main-course-bar img,
 .drinks-banner img,
@@ -157,10 +147,8 @@ header {
     padding: 10px 0;
 }
 
-
-/* ============================= */
 /* Dish Cards */
-/* ============================= */
+
 
 .dish-groupe {
     position: relative;
@@ -179,10 +167,7 @@ header {
     cursor: pointer;
 }
 
-
-/* ============================= */
 /* Order Button */
-/* ============================= */
 
 .order-button {
     position: absolute;
@@ -200,10 +185,7 @@ header {
     border-radius: 50%;
 }
 
-
-/* ============================= */
 /* Footer */
-/* ============================= */
 
 .footer {
     display: flex;
@@ -230,9 +212,8 @@ header {
 }
 
 
-/* ============================= */
 /* Dark Mode */
-/* ============================= */
+
 
 @media (prefers-color-scheme: dark) {
 

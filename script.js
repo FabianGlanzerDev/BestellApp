@@ -121,7 +121,7 @@ deliverySwitch.addEventListener("change", function () {
 
 let orderBtn = document.querySelector(".basket-order-btn");
 
-orderBtn.addEventListener("click", function() {
+orderBtn.addEventListener("click", function () {
 
     if (Object.keys(basket).length === 0) {
         alert("Dein Warenkorb ist leer!");
