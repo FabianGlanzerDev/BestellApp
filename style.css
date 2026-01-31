@@ -1,0 +1,261 @@
+body {
+    font-family: "Rubik", sans-serif;
+}
+
+/* ============================= */
+/* Header */
+/* ============================= */
+
+header {
+    background-color: #FF8008;
+    width: 100%;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FF8008;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    max-width: 1920px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo img {
+    height: 40px;
+    padding-left: 40px;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-link img {
+    height: 60px;
+}
+
+
+/* ============================= */
+/* Layout */
+/* ============================= */
+
+.content-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+
+.content-area {
+    flex: 0 1 1440px;
+    position: relative;
+
+    overflow-y: auto;
+    /* NUR HIER scrollen */
+    padding-bottom: 24px;
+}
+
+
+/* ============================= */
+/* Hero / Restaurant */
+/* ============================= */
+
+.image-first img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+}
+
+.restaurant-logo {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 10;
+}
+
+.restaurant-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.restaurant-title {
+    margin: 16px 0;
+}
+
+.reviews-ratings {
+    color: #FF8008;
+}
+
+
+/* ============================= */
+/* Navigation */
+/* ============================= */
+
+.nav-bevor-dishes {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-color: #F1F1F1;
+    box-shadow: 0px 2px #FF8008;
+}
+
+.nav-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.nav-links {
+    padding-left: 20px;
+    flex: 1;
+    display: flex;
+    gap: clamp(10px, 2vw, 40px);
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: black;
+    font-size: clamp(15px, 1.2vw + 10px, 22px);
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+    color: #FF8008;
+}
+
+
+/* ============================= */
+/* Category Banner */
+/* ============================= */
+
+.main-course-bar img,
+.drinks-banner img,
+.dessert-banner img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    display: block;
+    padding: 10px 0;
+}
+
+
+/* ============================= */
+/* Dish Cards */
+/* ============================= */
+
+.dish-groupe {
+    position: relative;
+    border: 3px solid #ec9b6c;
+    box-shadow: 10px 10px 8px #888888;
+    background-color: #e7e7e7;
+    padding: 10px;
+    margin-top: 10px;
+    transition: transform 0.15s ease, background-color 0.3s ease;
+}
+
+.dish-groupe:hover {
+    transform: translateY(-4px);
+    background-color: #FF8008;
+    box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+
+/* ============================= */
+/* Order Button */
+/* ============================= */
+
+.order-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 4px;
+    transition: 0.2s ease, transform 0.2s ease;
+}
+
+.dish-groupe:hover .order-button {
+    background: white;
+    border-radius: 50%;
+}
+
+
+/* ============================= */
+/* Footer */
+/* ============================= */
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FF8008;
+    margin-top: 20px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.author {
+    padding-top: 10px;
+}
+
+
+/* ============================= */
+/* Dark Mode */
+/* ============================= */
+
+@media (prefers-color-scheme: dark) {
+
+    body {
+        background: #0b1220;
+        color: #eaeaea;
+    }
+
+    .nav-bevor-dishes {
+        background-color: #121a2b;
+    }
+
+    .nav-links a {
+        color: #eaeaea;
+    }
+
+    .dish-groupe {
+        background-color: #121a2b;
+        border-color: #243042;
+        color: #eaeaea;
+    }
+
+    .reviews-ratings {
+        color: #FF8008;
+    }
+}

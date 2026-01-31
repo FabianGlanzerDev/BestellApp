@@ -1,0 +1,225 @@
+:root {
+    --header-h: 88px;
+}
+
+/* Basket Button im Header */
+.basket-btn {
+    background-color: #FF8008;
+    border: 0;
+    cursor: pointer;
+    margin-right: 24px;
+    /* statt right: 24px */
+}
+
+.basket-btn img {
+    height: 32px;
+    width: 32px;
+}
+
+.basket-sidebar {
+    position: relative;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
+}
+
+.basket-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+    overflow-y: auto;
+    max-height: calc(100vh - 81px);
+    padding: 24px;
+}
+
+.basket-title {
+    margin: 0 0 16px 0;
+    font-size: 22px;
+}
+
+.basket-delivery {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+/* Toggle Switch */
+.basket-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 22px;
+}
+
+.basket-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.basket-slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: #ddd;
+    border-radius: 999px;
+    transition: 0.2s;
+}
+
+.basket-slider:before {
+    content: "";
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    top: 2px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+.basket-switch input:checked+.basket-slider {
+    background: #FF8008;
+}
+
+.basket-switch input:checked+.basket-slider:before {
+    transform: translateX(22px);
+}
+
+/* Summary */
+.basket-summary {
+    border-top: 1px solid #eee;
+    padding-top: 14px;
+    margin-top: 6px;
+}
+
+.basket-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #666;
+    padding: 6px 0;
+}
+
+.basket-total {
+    font-weight: 700;
+    color: #000;
+    padding-top: 10px;
+}
+
+/* Button */
+.basket-order-btn {
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px 14px;
+    background: #FF8008;
+    border: 0;
+    color: white;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.basket-order-btn:hover {
+    filter: brightness(0.95);
+}
+
+.basket-empty {
+    color: #777;
+    padding: 10px 0;
+}
+
+.basket-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.basket-item-name {
+    font-weight: 700;
+}
+
+.basket-item-price {
+    font-size: 12px;
+    color: #777;
+    margin-top: 4px;
+}
+
+.basket-item-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.basket-qty-btn {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.basket-line-total {
+    margin-left: 10px;
+    font-weight: 700;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    /* rechte Spalte */
+    .basket-sidebar {
+        background: #0f172a;
+        /* ähnlich wie deine Cards */
+        border-left: 1px solid #243042;
+    }
+
+    /* der Sticky-Block selbst */
+    .basket-sticky {
+        background: transparent;
+        /* wenn Sidebar die Fläche macht */
+        color: #eaeaea;
+    }
+
+    .basket-title {
+        color: #eaeaea;
+    }
+
+    .basket-delivery,
+    .basket-row {
+        color: #cbd5e1;
+    }
+
+    .basket-total {
+        color: #eaeaea;
+    }
+
+    /* Switch */
+    .basket-slider {
+        background: #243042;
+    }
+
+    .basket-switch input:checked+.basket-slider {
+        background: #FF8008;
+    }
+
+    /* Button bleibt orange */
+    .basket-order-btn {
+        background: #FF8008;
+        color: #fff;
+    }
+
+    /* Optional: kleine Trennlinie im Darkmode */
+    .basket-summary {
+        border-top: 1px solid #243042;
+    }
+}
