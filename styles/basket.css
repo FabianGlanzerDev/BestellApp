@@ -31,7 +31,7 @@
     z-index: 1000;
     background-color: white;
     overflow-y: auto;
-    max-height: calc(100vh - 81px);
+    max-height: calc(100vh - 231px);
     padding: 24px;
 }
 
