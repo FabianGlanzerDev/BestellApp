@@ -20,6 +20,31 @@ img {
   display: block;
 }
 
+/*----> Scrollbar Chrome*/
+
+/* Scrollbar Breite */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Hintergrund der Scrollbar*/
+::-webkit-scrollbar-track {
+  background: #0b1220; /* Dark Background*/
+}
+
+/* Der eigentliche Scrollbalken */
+::-webkit-scrollbar-thumb {
+  background-color: #FF8008; /* Dein Orange*/
+  border-radius: 10px;
+  border: 2px solid #0b1220;
+}
+
+/* Hover-Effekt */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ff9a2f;
+}
+
+
 
 
 
