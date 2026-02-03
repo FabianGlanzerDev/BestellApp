@@ -2,13 +2,11 @@
     --header-h: 88px;
 }
 
-/* Basket Button im Header */
 .basket-btn {
     background-color: #FF8008;
     border: 0;
     cursor: pointer;
     margin-right: 24px;
-    /* statt right: 24px */
 }
 
 .basket-btn img {
@@ -16,14 +14,12 @@
     width: 32px;
 }
 
-/* Sidebar bleibt wie bei dir */
 .basket-sidebar {
     width: 300px;
     display: flex;
     flex-direction: column;
 }
 
-/* Sticky Container als Flex-Layout */
 .basket-sticky {
     position: sticky;
     top: var(--header-h);
@@ -31,13 +27,9 @@
     background: white;
     border-radius: 10px;
     box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
-
-    /* DAS ist der Gamechanger */
     display: flex;
     flex-direction: column;
     gap: 14px;
-
-    /* Höhe begrenzen */
     max-height: calc(100vh - var(--header-h) - 30px);
 }
 
@@ -55,7 +47,6 @@
     margin-bottom: 18px;
 }
 
-/* Toggle Switch */
 .basket-switch {
     position: relative;
     display: inline-block;
@@ -98,7 +89,6 @@
     transform: translateX(22px);
 }
 
-/* Summary */
 .basket-summary {
     border-top: 1px solid #eee;
     padding-top: 14px;
@@ -119,7 +109,6 @@
     padding-top: 10px;
 }
 
-/* Button */
 .basket-order-btn {
     width: 100%;
     margin-top: 18px;
@@ -142,17 +131,12 @@
     padding: 10px 0;
 }
 
-/* Der Items-Bereich bekommt den Scroll, nicht der ganze Warenkorb */
 .basket-items {
     flex: 1;
-    /* nimmt den freien Platz */
     overflow-y: auto;
-    /* scrollt nur hier */
     padding-right: 6px;
-    /* damit scrollbar nicht auf Text liegt */
 }
 
-/* Optional: schönerer Scrollbar-Abstand */
 .basket-items::-webkit-scrollbar {
     width: 8px;
 }
@@ -166,7 +150,6 @@
     background: transparent;
 }
 
-/* Summary bleibt unten, weil .basket-items flex:1 */
 .basket-summary {
     border-top: 1px solid #eee;
     padding-top: 12px;
@@ -219,17 +202,13 @@
 
 @media (prefers-color-scheme: dark) {
 
-    /* rechte Spalte */
     .basket-sidebar {
         background: #0f172a;
-        /* ähnlich wie deine Cards */
         border-left: 1px solid #243042;
     }
 
-    /* der Sticky-Block selbst */
     .basket-sticky {
         background: transparent;
-        /* wenn Sidebar die Fläche macht */
         color: #eaeaea;
     }
 
@@ -246,7 +225,6 @@
         color: #eaeaea;
     }
 
-    /* Switch */
     .basket-slider {
         background: #243042;
     }
@@ -255,13 +233,11 @@
         background: #FF8008;
     }
 
-    /* Button bleibt orange */
     .basket-order-btn {
         background: #FF8008;
         color: #fff;
     }
 
-    /* Optional: kleine Trennlinie im Darkmode */
     .basket-summary {
         border-top: 1px solid #243042;
     }
