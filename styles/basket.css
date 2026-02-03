@@ -16,23 +16,29 @@
     width: 32px;
 }
 
+/* Sidebar bleibt wie bei dir */
 .basket-sidebar {
-    position: relative;
     width: 300px;
     display: flex;
     flex-direction: column;
-    z-index: 1000;
-    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
 }
 
+/* Sticky Container als Flex-Layout */
 .basket-sticky {
     position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: white;
-    overflow-y: auto;
-    max-height: calc(100vh - 231px);
-    padding: 24px;
+    top: var(--header-h);
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
+
+    /* DAS ist der Gamechanger */
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    /* Höhe begrenzen */
+    max-height: calc(100vh - var(--header-h) - 35px);
 }
 
 .basket-title {
@@ -136,6 +142,36 @@
     padding: 10px 0;
 }
 
+/* Der Items-Bereich bekommt den Scroll, nicht der ganze Warenkorb */
+.basket-items {
+    flex: 1;
+    /* nimmt den freien Platz */
+    overflow-y: auto;
+    /* scrollt nur hier */
+    padding-right: 6px;
+    /* damit scrollbar nicht auf Text liegt */
+}
+
+/* Optional: schönerer Scrollbar-Abstand */
+.basket-items::-webkit-scrollbar {
+    width: 8px;
+}
+
+.basket-items::-webkit-scrollbar-thumb {
+    background: #ff8008;
+    border-radius: 10px;
+}
+
+.basket-items::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Summary bleibt unten, weil .basket-items flex:1 */
+.basket-summary {
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+}
+
 .basket-item {
     display: flex;
     justify-content: space-between;
@@ -160,13 +196,20 @@
     gap: 8px;
 }
 
-.basket-qty-btn {
+.basket-items button {
     width: 28px;
     height: 28px;
-    border: 1px solid #ddd;
-    background: white;
+    border-radius: 50%;
+    border: 1px solid #FF8008;
+    background: transparent;
+    color: #FF8008;
+    font-weight: 700;
     cursor: pointer;
-    border-radius: 6px;
+}
+
+.basket-items button:hover {
+    background: #FF8008;
+    color: #fff;
 }
 
 .basket-line-total {

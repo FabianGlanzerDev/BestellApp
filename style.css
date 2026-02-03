@@ -102,23 +102,29 @@ header {
 
 
 /* Navigation */
-
 .nav-bevor-dishes {
     display: flex;
     align-items: center;
-    height: 50px;
+    width: 100%;
+    min-height: 50px;
+    /* statt height */
+    height: auto;
+    /* wichtig: überschreibt fix height */
     background-color: #F1F1F1;
     box-shadow: 0px 2px #FF8008;
 }
 
 .nav-icon {
+    flex: 0 0 auto;
     width: 50px;
     height: 50px;
 }
 
+/* WICHTIG: min-width:0 damit Flex schrumpfen darf */
 .nav-links {
-    padding-left: 20px;
     flex: 1;
+    min-width: 0;
+    /* 🔥 das fehlt dir */
     display: flex;
     gap: clamp(10px, 2vw, 40px);
 }
@@ -133,6 +139,7 @@ header {
     text-decoration: underline;
     color: #FF8008;
 }
+
 
 
 /* Category Banner */
@@ -238,5 +245,176 @@ header {
 
     .reviews-ratings {
         color: #FF8008;
+    }
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+/* Tablet & kleiner */
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+        gap: 16px;
+        padding: 0 12px;
+    }
+
+    .content-area {
+        flex: 1;
+        max-width: 100%;
+    }
+
+    .basket-sidebar {
+        width: 100%;
+        box-shadow: none;
+    }
+
+    .basket-sticky {
+        position: static;
+        max-height: none;
+        border-radius: 8px;
+    }
+
+    /* Restaurant-Logo Position etwas nach oben, weil weniger Platz */
+    .restaurant-logo {
+        top: 140px;
+        width: 100px;
+        height: 100px;
+    }
+
+
+
+    /* Titel/Spacing etwas kompakter */
+    .restaurant-title {
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+}
+
+/* Handy: noch kompakter + Tabs-Navi statt abgeschnitten */
+@media (max-width: 480px) {
+
+    /* Verhindert nervige seitliche "Kante" durch zu breite Elemente */
+    body {
+        overflow-x: hidden;
+    }
+
+    .nav-bevor-dishes {
+        padding: 0 8px;
+        /* bisschen Luft links/rechts */
+    }
+
+    .nav-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .nav-links {
+        flex: 1;
+        min-width: 0;
+        /* 🔥 damit flex wirklich schrumpfen darf */
+        display: flex;
+        flex-wrap: wrap;
+        /* ✅ Umbruch erlaubt */
+        gap: 8px;
+        /* kleiner Abstand */
+        overflow: visible;
+        /* ✅ kein horizontal scroll */
+        padding-left: 12px;
+    }
+
+    .nav-links a {
+        font-size: clamp(13px, 4vw, 15px);
+        /* wird kleiner auf 320px */
+        padding: 4px 6px;
+        border-radius: 8px;
+        white-space: nowrap;
+        /* jedes Wort bleibt in einer Zeile */
+    }
+
+    /* ganz wichtig: Tabs/scroll aus */
+    .nav-links::-webkit-scrollbar {
+        height: auto;
+    }
+
+
+
+
+    /* Banner nicht mehr mit negativen margins / calc tricksen */
+    .image-first {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .image-first img {
+        height: 180px;
+    }
+
+    h1 {
+        font-size: 20px;
+        line-height: 1.2;
+    }
+
+    .reviews-ratings p {
+        font-size: 13px;
+    }
+
+
+
+    /* Dish Cards kompakter */
+    .dish-groupe {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    /* Basket kompakter */
+    .basket-order-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .basket-item {
+        gap: 8px;
+    }
+
+    /* +/- Buttons kleiner und schöner */
+    .basket-qty-btn {
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
+    }
+
+    .basket-line-total {
+        margin-left: 6px;
+        font-size: 13px;
+    }
+}
+
+/* Mini-Handy (320px) */
+@media (max-width: 360px) {
+    .image-first img {
+        height: 160px;
+    }
+
+    .restaurant-logo {
+        top: 130px;
+        width: 90px;
+        height: 90px;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+        padding: 6px 8px;
+    }
+
+    .basket-title {
+        font-size: 18px;
+    }
+
+    .basket-row {
+        font-size: 12px;
     }
 }

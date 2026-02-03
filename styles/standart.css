@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -6,7 +7,9 @@ html, body {
   box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -29,12 +32,14 @@ img {
 
 /* Hintergrund der Scrollbar*/
 ::-webkit-scrollbar-track {
-  background: #0b1220; /* Dark Background*/
+  background: #0b1220;
+  /* Dark Background*/
 }
 
 /* Der eigentliche Scrollbalken */
 ::-webkit-scrollbar-thumb {
-  background-color: #FF8008; /* Dein Orange*/
+  background-color: #FF8008;
+  /* Dein Orange*/
   border-radius: 10px;
   border: 2px solid #0b1220;
 }
@@ -43,10 +48,3 @@ img {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #ff9a2f;
 }
-
-
-
-
-
-
-

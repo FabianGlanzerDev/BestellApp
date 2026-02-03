@@ -24,9 +24,10 @@
                     <img src=".//assets/img/Logo 01.png" alt="Logo" />
                 </a>
             </div>
-            <button class="basket-btn">
-                <img src=".//assets/img/basket.png" alt="Warenkorb öffnen" />
-            </button>
+            <a href="#basket" class="basket-btn">
+                <img src="./assets/img/basket.png" alt="Warenkorb öffnen" />
+            </a>
+
         </div>
     </header>
     <main class="content-wrapper">
@@ -137,7 +138,8 @@
 
         </div>
         <!--Basket-->
-        <div class="basket-sticky">
+        <div class="basket-sticky" id="basket">
+
             <h2 class="basket-title">Warenkorb</h2>
 
             <div class="basket-delivery">
@@ -170,7 +172,9 @@
 
             <button class="basket-order-btn">Bestellen</button>
         </div>
+        <script src="./scripts/db.js"></script>
         <script src="./script.js"></script>
+
 
     </main>
 
