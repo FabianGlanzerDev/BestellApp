@@ -18,12 +18,7 @@ a {
   color: inherit;
 }
 
-img {
-  max-width: 100%;
-  display: block;
-}
 
-/*----> Scrollbar Chrome*/
 
 /* Scrollbar Breite */
 ::-webkit-scrollbar {

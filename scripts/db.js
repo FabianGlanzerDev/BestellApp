@@ -1,7 +1,7 @@
-// Warenkorb als Objekt speichern
+// Save shopping cart as object
 let basket = {};
 
-// Elemente vom Warenkorb holen
+// Retrieve items from shopping cart
 let basketItems = document.querySelector(".basket-items");
 let subtotalText = document.querySelector(".basket-subtotal");
 let deliveryText = document.querySelector(".basket-delivery-cost");

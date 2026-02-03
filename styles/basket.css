@@ -38,7 +38,7 @@
     gap: 14px;
 
     /* Höhe begrenzen */
-    max-height: calc(100vh - var(--header-h) - 35px);
+    max-height: calc(100vh - var(--header-h) - 30px);
 }
 
 .basket-title {
