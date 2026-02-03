@@ -1,7 +1,6 @@
-// Save shopping cart as object
+// save shopping cart as object
 let basket = {};
-
-// Retrieve items from shopping cart
+// retrieve items from shopping cart
 let basketItems = document.querySelector(".basket-items");
 let subtotalText = document.querySelector(".basket-subtotal");
 let deliveryText = document.querySelector(".basket-delivery-cost");
