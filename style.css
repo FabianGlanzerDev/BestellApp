@@ -348,8 +348,6 @@ header {
 @media (max-width: 768px) {
     .content-wrapper {
         flex-direction: column;
-        gap: 16px;
-        padding: 0 12px;
     }
 
     .content-area {
@@ -379,13 +377,14 @@ header {
 
     .basket-sticky {
         position: static;
-        /* wichtig */
         top: auto;
+        width: 100%;
         max-height: none;
-        /* wichtig */
+        height: auto;
         overflow: visible;
-        /* wichtig */
     }
+    
+
 
 }
 
@@ -455,4 +454,24 @@ header {
         font-size: 13px;
         padding: 6px 8px;
     }
+
+    .basket-items {
+        overflow: visible !important;
+        max-height: none !important;
+        height: auto !important;
+    }
+
 }
+
+:root { --footer-h: 0px; } 
+
+@media (max-width: 768px) {
+  main, .content-wrapper {
+    padding-bottom: var(--footer-h);
+  }
+}
+
+
+
+
+

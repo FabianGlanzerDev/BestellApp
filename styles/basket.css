@@ -16,16 +16,12 @@
 }
 
 .basket-sticky {
-    position: sticky;
-    top: 0;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
-    max-height: calc(70vh - 230px);
+    max-height: calc(100vh - var(--header-h) - var(--footer-h));
+    overflow: hidden;
 }
+
 
 
 .basket-title {
@@ -196,6 +192,8 @@
     font-weight: 700;
 }
 
+
+
 @media (prefers-color-scheme: dark) {
 
     .basket-sidebar {
@@ -225,7 +223,7 @@
         background: #243042;
     }
 
-    .basket-switch input:checked+.basket-slider {
+    .basket-switch input:checked .basket-slider {
         background: #FF8008;
     }
 
