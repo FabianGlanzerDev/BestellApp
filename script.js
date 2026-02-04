@@ -1,4 +1,5 @@
 // prices
+
 function convertPrice(text) {
     let newText = text.replace("€", "").trim();
     newText = newText.replace(/\s/g, "");
@@ -11,9 +12,11 @@ function formatPrice(number) {
 }
 
 // basket
+
 let basket = {};
 
 // dom
+
 const basketItems = document.querySelector(".basket-items");
 const subtotalText = document.querySelector(".basket-subtotal");
 const deliveryText = document.querySelector(".basket-delivery-cost");
@@ -22,42 +25,51 @@ const deliverySwitch = document.querySelector(".basket-switch input");
 const orderBtn = document.querySelector(".basket-order-btn");
 
 // Lists for dishes
+
 const mainListEl = document.querySelector("#main-list");
 const drinksListEl = document.querySelector("#drinks-list");
 const dessertListEl = document.querySelector("#dessert-list");
 
 // render dishes
+
 function renderDishes() {
-    if (!mainListEl || !drinksListEl || !dessertListEl) {
-        console.warn("Listen-Container fehlen (main-list / drinks-list / dessert-list).");
-        return;
-    }
-    // clear lists
+    if (!mainListEl || !drinksListEl || !dessertListEl) return;
+    if (!Array.isArray(DISHES)) return;
+    if (typeof dishTemplate !== "function") return;
+
     mainListEl.innerHTML = "";
     drinksListEl.innerHTML = "";
     dessertListEl.innerHTML = "";
 
-    if (typeof DISHES === "undefined") {
-        console.error("DISHES ist undefined → db.js wird nicht korrekt geladen oder Reihenfolge falsch.");
-        return;
-    }
-
-    if (typeof dishTemplate !== "function") {
-        console.error("dishTemplate() fehlt → templates.js wird nicht korrekt geladen oder Reihenfolge falsch.");
-        return;
-    }
-    // render to the correct category
-    DISHES.forEach((dish) => {
+    DISHES.forEach(dish => {
         if (dish.category === "main") {
             mainListEl.innerHTML += dishTemplate(dish);
-        } else if (dish.category === "drinks") {
+        }
+        if (dish.category === "drinks") {
             drinksListEl.innerHTML += dishTemplate(dish);
-        } else if (dish.category === "dessert") {
+        }
+        if (dish.category === "dessert") {
             dessertListEl.innerHTML += dishTemplate(dish);
         }
     });
 }
-// baskte logikj
+
+
+// render to the correct category
+
+DISHES.forEach((dish) => {
+    if (dish.category === "main") {
+        mainListEl.innerHTML += dishTemplate(dish);
+    } else if (dish.category === "drinks") {
+        drinksListEl.innerHTML += dishTemplate(dish);
+    } else if (dish.category === "dessert") {
+        dessertListEl.innerHTML += dishTemplate(dish);
+    }
+});
+
+
+// baskte logik
+
 function addToBasket(dishEl) {
     if (!dishEl) return;
 
@@ -91,7 +103,9 @@ function getDeliveryCost() {
     if (Object.keys(basket).length === 0) return 0;
     return deliverySwitch && deliverySwitch.checked ? 5 : 0;
 }
+
 // rendewr basket
+
 function showBasket() {
     basketItems.innerHTML = "";
 
@@ -100,30 +114,28 @@ function showBasket() {
 
     if (ids.length === 0) {
         basketItems.innerHTML = `<div class="basket-empty">Noch leer</div>`;
-    } else {
-        ids.forEach((id) => {
-            const item = basket[id];
-            const linePrice = item.price * item.amount;
-            subtotal += linePrice;
-
-            basketItems.innerHTML += `
-        <div class="basket-item">
-          <div class="basket-item-left">
-            <div class="basket-item-name">${item.name}</div>
-            <div class="basket-item-price">${formatPrice(item.price)}</div>
-          </div>
-
-          <div class="basket-item-right">
-            <button class="basket-qty-btn" data-id="${id}" data-delta="-1" type="button">-</button>
-            <span class="basket-qty">${item.amount}</span>
-            <button class="basket-qty-btn" data-id="${id}" data-delta="1" type="button">+</button>
-            <div class="basket-line-total">${formatPrice(linePrice)}</div>
-          </div>
-        </div>
-      `;
-        });
+        updateTotals(0);
+        return;
     }
 
+    let html = "";
+
+    ids.forEach((id) => {
+        const item = basket[id];
+        subtotal += item.price * item.amount;
+        html += basketItemTemplate(id, item);
+    });
+
+    basketItems.innerHTML = html;
+    updateTotals(subtotal);
+}
+
+function getDeliveryCost() {
+    if (Object.keys(basket).length === 0) return 0;
+    return deliverySwitch && deliverySwitch.checked ? 5 : 0;
+}
+
+function updateTotals(subtotal) {
     const delivery = getDeliveryCost();
     const total = subtotal + delivery;
 
@@ -131,7 +143,9 @@ function showBasket() {
     deliveryText.innerText = formatPrice(delivery);
     totalText.innerText = formatPrice(total);
 }
+
 // Click on the plus sign next to the dishes.
+
 document.addEventListener("click", (event) => {
     const btn = event.target.closest(".order-button");
     if (!btn) return;
@@ -139,7 +153,9 @@ document.addEventListener("click", (event) => {
     const dish = btn.closest(".dish-groupe");
     addToBasket(dish);
 });
+
 // +/- basket
+
 basketItems.addEventListener("click", (event) => {
     const btn = event.target.closest(".basket-qty-btn");
     if (!btn) return;
@@ -148,24 +164,61 @@ basketItems.addEventListener("click", (event) => {
     const delta = Number(btn.dataset.delta);
     changeAmount(id, delta);
 });
+
 // change delivery
+
 if (deliverySwitch) {
     deliverySwitch.addEventListener("change", () => showBasket());
 }
-// order
-if (orderBtn) {
-    orderBtn.addEventListener("click", () => {
-        if (Object.keys(basket).length === 0) {
-            alert("Dein Warenkorb ist leer!");
-            return;
-        }
 
-        alert("Danke für deine Bestellung! Deine Bestellung wird jetzt vorbereitet.");
-        basket = {};
-        showBasket();
-    });
-}
+// order
+
+document.addEventListener("DOMContentLoaded", () => {
+  const orderBtn = document.querySelector(".basket-order-btn");
+  const orderModal = document.querySelector("#orderModal");
+
+  if (!orderBtn) console.warn("❌ .basket-order-btn nicht gefunden");
+  if (!orderModal) console.warn("❌ #orderModal nicht gefunden");
+
+  function openModal() {
+    orderModal.classList.add("is-open");
+    orderModal.setAttribute("aria-hidden", "false");
+  }
+
+  function closeModal() {
+    orderModal.classList.remove("is-open");
+    orderModal.setAttribute("aria-hidden", "true");
+  }
+
+  // Schließen per Klick (Overlay, X, Ok)
+  orderModal?.addEventListener("click", (e) => {
+    if (e.target.dataset.close === "true") closeModal();
+  });
+
+  // Schließen per ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && orderModal?.classList.contains("is-open")) closeModal();
+  });
+
+  // Bestellen
+  orderBtn?.addEventListener("click", () => {
+    if (Object.keys(basket).length === 0) {
+      alert("Dein Warenkorb ist leer!");
+      return;
+    }
+
+    // Warenkorb leeren + UI updaten
+    basket = {};
+    showBasket();
+
+    // Popup zeigen
+    openModal();
+  });
+});
+
+
 // start !
+
 renderDishes();
 showBasket();
 
