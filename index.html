@@ -2,33 +2,36 @@
 <html lang="de">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BestellApp</title>
-    <link rel="icon" type="image/x-icon" href=".//assets/img/favicon.png">
-    <link rel="stylesheet" href="./styles/standart.css">
-    <link rel="stylesheet" href="./styles/fonts.css">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./styles/basket.css">
-    <link rel="stylesheet" href="./styles/assets.css">
+
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png" />
+    <link rel="stylesheet" href="./styles/standart.css" />
+    <link rel="stylesheet" href="./styles/fonts.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./styles/basket.css" />
+    <link rel="stylesheet" href="./styles/assets.css" />
 </head>
 
 <body>
     <header>
         <div class="header-container">
             <div class="header-logo">
-
                 <a href="index.html" class="logo-link">
-                    <img src=".//assets/img/Logo 01.png" alt="Logo" />
+                    <img src="./assets/img/Logo 01.png" alt="Logo" />
                 </a>
             </div>
+
             <a href="#basket" class="basket-btn">
                 <img src="./assets/img/basket.png" alt="Warenkorb öffnen" />
             </a>
-
         </div>
     </header>
+
     <main class="content-wrapper">
+
+        <!-- LINKS: Content -->
         <div class="content-area">
 
             <div class="image-first">
@@ -56,88 +59,37 @@
                 </div>
             </div>
 
-            <!-- Hauptgerichte -->
-            <div class="main-course-bar" id="main-course">
-                <img src="./assets/img/main-course.png" alt="Hauptspeisen">
-                <b>Hauptgerichte</b>
-            </div>
-
-            <div class="dishes-list">
-                <div class="dish-groupe">
-                    <h3>Pizza Margherita</h3>
-                    <span>Klassische Tomaten, geschmolzenem Käse, Basilikum und Olivenöl</span><br><br>
-                    <span>10.99€</span>
-                    <button class="order-button">
-                        <img src="./assets/img/icons-plus-order.png" alt="add-basket">
-                    </button>
+            <!-- main-courses -->
+            <section id="main-course">
+                <div class="main-course">
+                <img src="./assets/img/main-course.png" alt="Hauptgerichte Banner">
+                <h2>Hauptgerichte</h2>
+                <div class="dishes-list" id="main-list"></div>
                 </div>
+            </section>
 
-                <div class="dish-groupe">
-                    <h3>Pizza Tonno</h3>
-                    <span>Thunfisch, Zwiebeln und Mozzarella</span><br><br>
-                    <span>13.99€</span>
-                    <button class="order-button">
-                        <img src="./assets/img/icons-plus-order.png" alt="add-basket">
-                    </button>
+            <!-- drinks -->
+            <section id="drinks">
+                <div class="main-drinks">
+                <img src="./assets/img/drinks.png" alt="Getränke Banner">
+                <h2>Getränke</h2>
+                <div class="dishes-list" id="drinks-list"></div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Getränke -->
-            <div class="drinks-banner" id="drinks">
-                <img src="./assets/img/drinks.png" alt="Getränke">
-                <b>Getränke</b>
-            </div>
-
-            <div class="dishes-list">
-                <div class="dish-groupe">
-                    <h3>Coca Cola 0,5l</h3>
-                    <span>Erfrischungsgetränk</span><br><br>
-                    <span>3.99€</span>
-                    <button class="order-button">
-                        <img src="./assets/img/icons-plus-order.png" alt="add-basket">
-                    </button>
-                </div>
-
-                <div class="dish-groupe">
-                    <h3>Fanta 0,5l</h3>
-                    <span>Orangenlimonade</span><br><br>
-                    <span>3.99€</span>
-                    <button class="order-button">
-                        <img src="./assets/img/icons-plus-order.png" alt="add-basket">
-                    </button>
-                </div>
-            </div>
-
-            <!-- Nachspeiße -->
-            <div class="dessert-banner" id="dessert">
-                <img src="./assets/img/dessert.png" alt="Nachspeiße">
-                <b>Nachspeiße</b>
-            </div>
-
-            <div class="dishes-list">
-                <div class="dish-groupe">
-                    <h3>Schoko Kuchen</h3>
-                    <span>Saftig & schokoladig</span><br><br>
-                    <span>4.99€</span>
-                    <button class="order-button">
-                        <img src="./assets/img/icons-plus-order.png" alt="add-basket">
-                    </button>
-                </div>
-
-                <div class="dish-groupe">
-                    <h3>Muffin</h3>
-                    <span>Frisch gebacken</span><br><br>
-                    <span>3.99€</span>
-                    <button class="order-button" id="add-to-basket">
-                        <img src="./assets/img/icons-plus-order.png" alt="add-basket">
-                    </button>
-                </div>
-            </div>
+            <!-- dessert -->
+            <section id="dessert">
+               <div class="main-dessert">
+                <img src="./assets/img/dessert.png" alt="Nachspeiße Banner">
+                <h2>Nachspeiße</h2>
+                <div class="dishes-list" id="dessert-list"></div>
+               </div>
+            </section>
 
         </div>
-        <!--Basket-->
-        <div class="basket-sticky" id="basket">
 
+        <!-- basket-right side -->
+        <aside class="basket-sticky" id="basket">
             <h2 class="basket-title">Warenkorb</h2>
 
             <div class="basket-delivery">
@@ -147,7 +99,10 @@
                     <input type="checkbox" aria-label="Liefern aktivieren">
                     <span class="basket-slider" aria-hidden="true"></span>
                 </label>
+
+                <span>Liefern</span>
             </div>
+
             <div class="basket-items"></div>
 
             <div class="basket-summary">
@@ -165,26 +120,25 @@
                 </div>
             </div>
 
-
             <button class="basket-order-btn">Bestellen</button>
-        </div>
-        <script src="./scripts/db.js"></script>
-        <script src="./script.js"></script>
-
+        </aside>
 
     </main>
 
+    <script src="./scripts/db.js"></script>
+    <script src="./scripts/templates.js"></script>
+    <script src="./script.js"></script>
 
     <footer class="footer">
         <div class="footer-container">
             <a href="./index.html">
-                <img src=".//assets/img/Logo 01.png" alt="footer-logo"></a>
+                <img src="./assets/img/Logo 01.png" alt="footer-logo">
+            </a>
             <div class="author">
                 <span>© FabsDev</span>
             </div>
         </div>
     </footer>
-
 </body>
 
 </html>

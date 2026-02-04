@@ -1,33 +1,83 @@
-// convert price text like "13.99€" into a number
+// prices
 function convertPrice(text) {
-    let newText = text.replace("€", "");
+    let newText = text.replace("€", "").trim();
+    newText = newText.replace(/\s/g, "");
     newText = newText.replace(",", ".");
-    newText = newText.trim();
-    return Number(newText);
+    return Number(newText) || 0;
 }
-// display number again as Euros
+
 function formatPrice(number) {
     return number.toFixed(2).replace(".", ",") + " €";
 }
-// add item to cart
-function addToBasket(dish) {
-    let name = dish.querySelector("h3").innerText;
-    let priceText = dish.querySelector("span:last-of-type").innerText;
-    let price = convertPrice(priceText);
-    let id = name; //  name to ID
+
+// basket
+let basket = {};
+
+// dom
+const basketItems = document.querySelector(".basket-items");
+const subtotalText = document.querySelector(".basket-subtotal");
+const deliveryText = document.querySelector(".basket-delivery-cost");
+const totalText = document.querySelector(".basket-total-value");
+const deliverySwitch = document.querySelector(".basket-switch input");
+const orderBtn = document.querySelector(".basket-order-btn");
+
+// Lists for dishes
+const mainListEl = document.querySelector("#main-list");
+const drinksListEl = document.querySelector("#drinks-list");
+const dessertListEl = document.querySelector("#dessert-list");
+
+// render dishes
+function renderDishes() {
+    if (!mainListEl || !drinksListEl || !dessertListEl) {
+        console.warn("Listen-Container fehlen (main-list / drinks-list / dessert-list).");
+        return;
+    }
+    // clear lists
+    mainListEl.innerHTML = "";
+    drinksListEl.innerHTML = "";
+    dessertListEl.innerHTML = "";
+
+    if (typeof DISHES === "undefined") {
+        console.error("DISHES ist undefined → db.js wird nicht korrekt geladen oder Reihenfolge falsch.");
+        return;
+    }
+
+    if (typeof dishTemplate !== "function") {
+        console.error("dishTemplate() fehlt → templates.js wird nicht korrekt geladen oder Reihenfolge falsch.");
+        return;
+    }
+    // render to the correct category
+    DISHES.forEach((dish) => {
+        if (dish.category === "main") {
+            mainListEl.innerHTML += dishTemplate(dish);
+        } else if (dish.category === "drinks") {
+            drinksListEl.innerHTML += dishTemplate(dish);
+        } else if (dish.category === "dessert") {
+            dessertListEl.innerHTML += dishTemplate(dish);
+        }
+    });
+}
+// baskte logikj
+function addToBasket(dishEl) {
+    if (!dishEl) return;
+
+    const id = dishEl.dataset.id || dishEl.querySelector("h3")?.innerText.trim();
+    const name = dishEl.querySelector("h3")?.innerText.trim() || "Unbekannt";
+    const priceText = dishEl.querySelector("span:last-of-type")?.innerText || "0";
+    const price = convertPrice(priceText);
+
     if (!basket[id]) {
-        basket[id] = {
-            name: name,
-            price: price,
-            amount: 1
-        };
+        basket[id] = { name, price, amount: 1 };
     } else {
         basket[id].amount++;
     }
+
     showBasket();
 }
-// Change quantity
+
 function changeAmount(id, value) {
+    if (!basket[id]) return;
+
     basket[id].amount += value;
 
     if (basket[id].amount <= 0) {
@@ -36,78 +86,90 @@ function changeAmount(id, value) {
 
     showBasket();
 }
-// Calculate delivery costs
+
 function getDeliveryCost() {
-    if (Object.keys(basket).length === 0) {
-        return 0;
-    }
-
-    if (deliverySwitch.checked) {
-        return 5;
-    }
-
-    return 0;
+    if (Object.keys(basket).length === 0) return 0;
+    return deliverySwitch && deliverySwitch.checked ? 5 : 0;
 }
-// Show shopping cart
+// rendewr basket
 function showBasket() {
     basketItems.innerHTML = "";
-    let subtotal = 0;
-    for (let id in basket) {
-        let item = basket[id];
-        let linePrice = item.price * item.amount;
-        subtotal += linePrice;
 
-        basketItems.innerHTML += `
-            <div class="basket-item">
-                <div>
-                    <b>${item.name}</b><br>
-                    ${formatPrice(item.price)}
-                </div>
-                <div>
-                    <button onclick="changeAmount('${id}', -1)">-</button>
-                    ${item.amount}
-                    <button onclick="changeAmount('${id}', 1)">+</button>
-                    <br>
-                    ${formatPrice(linePrice)}
-                </div>
-            </div>
-        `;
+    let subtotal = 0;
+    const ids = Object.keys(basket);
+
+    if (ids.length === 0) {
+        basketItems.innerHTML = `<div class="basket-empty">Noch leer</div>`;
+    } else {
+        ids.forEach((id) => {
+            const item = basket[id];
+            const linePrice = item.price * item.amount;
+            subtotal += linePrice;
+
+            basketItems.innerHTML += `
+        <div class="basket-item">
+          <div class="basket-item-left">
+            <div class="basket-item-name">${item.name}</div>
+            <div class="basket-item-price">${formatPrice(item.price)}</div>
+          </div>
+
+          <div class="basket-item-right">
+            <button class="basket-qty-btn" data-id="${id}" data-delta="-1" type="button">-</button>
+            <span class="basket-qty">${item.amount}</span>
+            <button class="basket-qty-btn" data-id="${id}" data-delta="1" type="button">+</button>
+            <div class="basket-line-total">${formatPrice(linePrice)}</div>
+          </div>
+        </div>
+      `;
+        });
     }
-    let delivery = getDeliveryCost();
-    let total = subtotal + delivery;
+
+    const delivery = getDeliveryCost();
+    const total = subtotal + delivery;
+
     subtotalText.innerText = formatPrice(subtotal);
     deliveryText.innerText = formatPrice(delivery);
     totalText.innerText = formatPrice(total);
 }
-// click on the + buttons
-document.querySelectorAll(".order-button").forEach(button => {
-    button.addEventListener("click", function (event) {
-        let btn = event.target.closest(".order-button");
-        let dish = btn.closest(".dish-groupe");
-        addToBasket(dish);
-    });
+// Click on the plus sign next to the dishes.
+document.addEventListener("click", (event) => {
+    const btn = event.target.closest(".order-button");
+    if (!btn) return;
+
+    const dish = btn.closest(".dish-groupe");
+    addToBasket(dish);
 });
-// when switching between pickup and delivery
-deliverySwitch.addEventListener("change", function () {
-    showBasket();
+// +/- basket
+basketItems.addEventListener("click", (event) => {
+    const btn = event.target.closest(".basket-qty-btn");
+    if (!btn) return;
+
+    const id = btn.dataset.id;
+    const delta = Number(btn.dataset.delta);
+    changeAmount(id, delta);
 });
-// alert, click order button
-let orderBtn = document.querySelector(".basket-order-btn");
-orderBtn.addEventListener("click", function () {
-    if (Object.keys(basket).length === 0) {
-        alert("Dein Warenkorb ist leer!");
-    } else {
+// change delivery
+if (deliverySwitch) {
+    deliverySwitch.addEventListener("change", () => showBasket());
+}
+// order
+if (orderBtn) {
+    orderBtn.addEventListener("click", () => {
+        if (Object.keys(basket).length === 0) {
+            alert("Dein Warenkorb ist leer!");
+            return;
+        }
+
         alert("Danke für deine Bestellung! Deine Bestellung wird jetzt vorbereitet.");
-
-        // empty shopping cart
         basket = {};
-
-        // update UI
         showBasket();
-    }
-});
-// startup display
+    });
+}
+// start !
+renderDishes();
 showBasket();
+
+
 
 
 

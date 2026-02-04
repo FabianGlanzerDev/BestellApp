@@ -2,8 +2,7 @@ body {
     font-family: "Rubik", sans-serif;
 }
 
-/* Header */
-
+/* HEADER */
 header {
     background-color: #FF8008;
     width: 100%;
@@ -13,22 +12,16 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #FF8008;
-    padding-top: 24px;
-    padding-bottom: 24px;
     max-width: 1920px;
-    width: 100%;
     margin: 0 auto;
+    width: 100%;
+    padding: 24px 24px;
+    box-sizing: border-box;
 }
 
 .header-logo {
     display: flex;
     align-items: center;
-}
-
-.header-logo img {
-    height: 40px;
-    padding-left: 40px;
 }
 
 .logo-link {
@@ -39,28 +32,33 @@ header {
 
 .logo-link img {
     height: 60px;
+    width: auto;
 }
 
-/* Layout */
-
+/* LAYOUT (Content + Basket) */
 .content-wrapper {
-    width: 100%;
     display: flex;
     justify-content: center;
     gap: 24px;
     padding: 0 24px;
-    box-sizing: border-box;
+    align-items: flex-start;
 }
 
+
+/* Linke Spalte: Content */
 .content-area {
-    flex: 0 1 1440px;
+    width: 100%;
+    max-width: 1440px;
     position: relative;
-    overflow-y: auto;
-    padding-bottom: 24px;
 }
 
-/* Restaurant */
+/* Rechte Spalte: Basket */
+.basket-sticky {
+    width: 300px;
+    flex: 0 0 300px;
+}
 
+/* RESTAURANT / BANNER */
 .image-first img {
     width: 100%;
     height: 240px;
@@ -82,13 +80,6 @@ header {
     z-index: 10;
 }
 
-.content-wrapper {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    align-items: flex-start;
-}
-
 .restaurant-logo img {
     width: 100%;
     height: 100%;
@@ -103,13 +94,14 @@ header {
     color: #FF8008;
 }
 
-/* Navigation */
+/* NAVIGATION */
 .nav-bevor-dishes {
     display: flex;
     align-items: center;
+
     width: 100%;
     min-height: 50px;
-    height: auto;
+
     background-color: #F1F1F1;
     box-shadow: 0px 2px #FF8008;
 }
@@ -125,12 +117,14 @@ header {
     min-width: 0;
     display: flex;
     gap: clamp(10px, 2vw, 40px);
+    padding-left: 20px;
 }
 
 .nav-links a {
     text-decoration: none;
     color: black;
     font-size: clamp(15px, 1.2vw + 10px, 22px);
+    white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -138,11 +132,10 @@ header {
     color: #FF8008;
 }
 
-/* category banner */
-
-.main-course-bar img,
-.drinks-banner img,
-.dessert-banner img {
+/* CATEGORY BANNER */
+.main-course img,
+.main-drinks img,
+.main-dessert img {
     width: 100%;
     height: 120px;
     object-fit: cover;
@@ -150,13 +143,17 @@ header {
     padding: 10px 0;
 }
 
-/* dish cards */
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
 
-
+/* DISH CARDS */
 .dish-groupe {
     position: relative;
     border: 3px solid #ec9b6c;
-    box-shadow: 10px 10px 8px #888888;
+    box-shadow: 3px 3px 8px #888888;
     background-color: #e7e7e7;
     padding: 10px;
     margin-top: 10px;
@@ -169,8 +166,6 @@ header {
     box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
-
-/* order button */
 
 .order-button {
     position: absolute;
@@ -188,8 +183,7 @@ header {
     border-radius: 50%;
 }
 
-/* footer */
-
+/* FOOTER */
 .footer {
     display: flex;
     justify-content: center;
@@ -203,8 +197,7 @@ header {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding: 24px 0;
     text-align: center;
     max-width: 100%;
     margin: 0 auto;
@@ -214,9 +207,8 @@ header {
     padding-top: 10px;
 }
 
-/* dark-mode */
+/* DARK MODE */
 @media (prefers-color-scheme: dark) {
-
     body {
         background: #0b1220;
         color: #eaeaea;
@@ -243,31 +235,21 @@ header {
 
 /* RESPONSIVE */
 
-/* Tablet & smaller */
+/* Tablet */
 @media (max-width: 768px) {
     .content-wrapper {
-        display: flex;
         flex-direction: column;
         gap: 16px;
         padding: 0 12px;
     }
 
     .content-area {
-        flex: 1;
         max-width: 100%;
-    }
-
-    .basket-sidebar {
-        width: 100%;
-        box-shadow: none;
     }
 
     .basket-sticky {
-        position: static;
         width: 100%;
-        max-width: 100%;
-        max-height: none;
-        margin-top: 16px;
+        flex: 1;
     }
 
     .restaurant-logo {
@@ -275,22 +257,16 @@ header {
         width: 100px;
         height: 100px;
     }
-
-    /* Title/Spacing slightly more compact */
-    .restaurant-title {
-        margin-top: 12px;
-        margin-bottom: 12px;
-    }
 }
 
+/* Handy */
 @media (max-width: 480px) {
-
     body {
         overflow-x: hidden;
     }
 
-    .nav-bevor-dishes {
-        padding: 0 8px;
+    .image-first img {
+        height: 180px;
     }
 
     .nav-icon {
@@ -299,34 +275,21 @@ header {
     }
 
     .nav-links {
-        flex: 1;
-        min-width: 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        overflow: visible;
+        gap: 12px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
         padding-left: 12px;
     }
 
-    .nav-links a {
-        font-size: clamp(13px, 4vw, 15px);
-        padding: 4px 6px;
-        border-radius: 8px;
-        white-space: nowrap;
-    }
-
     .nav-links::-webkit-scrollbar {
-        height: auto;
+        height: 0;
     }
 
-    .image-first {
-        margin-left: 0;
-        margin-right: 0;
-        width: 100%;
-    }
-
-    .image-first img {
-        height: 180px;
+    .nav-links a {
+        font-size: 14px;
+        padding: 6px 10px;
+        border-radius: 999px;
     }
 
     h1 {
@@ -337,36 +300,16 @@ header {
     .reviews-ratings p {
         font-size: 13px;
     }
-
-
-    .dish-groupe {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-
-    .basket-order-btn {
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    .basket-item {
-        gap: 8px;
-    }
-
-    .basket-qty-btn {
-        width: 26px;
-        height: 26px;
-        border-radius: 8px;
-    }
-
-    .basket-line-total {
-        margin-left: 6px;
-        font-size: 13px;
-    }
 }
 
-/* (320px) */
+@media (max-width: 385px) {
+    .nav-links {
+        flex-direction: column;
+    }
+
+}
+
+/* 320px */
 @media (max-width: 360px) {
     .image-first img {
         height: 160px;
@@ -381,13 +324,5 @@ header {
     .nav-links a {
         font-size: 13px;
         padding: 6px 8px;
-    }
-
-    .basket-title {
-        font-size: 18px;
-    }
-
-    .basket-row {
-        font-size: 12px;
     }
 }
