@@ -174,54 +174,57 @@ if (deliverySwitch) {
 // order
 
 document.addEventListener("DOMContentLoaded", () => {
-  const orderBtn = document.querySelector(".basket-order-btn");
-  const orderModal = document.querySelector("#orderModal");
+    const orderBtn = document.querySelector(".basket-order-btn");
+    const orderModal = document.querySelector("#orderModal");
 
-  if (!orderBtn) console.warn("❌ .basket-order-btn nicht gefunden");
-  if (!orderModal) console.warn("❌ #orderModal nicht gefunden");
+    if (!orderBtn) console.warn("❌ .basket-order-btn nicht gefunden");
+    if (!orderModal) console.warn("❌ #orderModal nicht gefunden");
 
-  function openModal() {
-    orderModal.classList.add("is-open");
-    orderModal.setAttribute("aria-hidden", "false");
-  }
-
-  function closeModal() {
-    orderModal.classList.remove("is-open");
-    orderModal.setAttribute("aria-hidden", "true");
-  }
-
-  // Schließen per Klick (Overlay, X, Ok)
-  orderModal?.addEventListener("click", (e) => {
-    if (e.target.dataset.close === "true") closeModal();
-  });
-
-  // Schließen per ESC
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && orderModal?.classList.contains("is-open")) closeModal();
-  });
-
-  // Bestellen
-  orderBtn?.addEventListener("click", () => {
-    if (Object.keys(basket).length === 0) {
-      alert("Dein Warenkorb ist leer!");
-      return;
+    function openModal() {
+        orderModal.classList.add("is-open");
+        orderModal.setAttribute("aria-hidden", "false");
     }
 
-    // Warenkorb leeren + UI updaten
-    basket = {};
-    showBasket();
+    function closeModal() {
+        orderModal.classList.remove("is-open");
+        orderModal.setAttribute("aria-hidden", "true");
+    }
 
-    // Popup zeigen
-    openModal();
-  });
+    // close click x or evt.
+
+    orderModal?.addEventListener("click", (e) => {
+        if (e.target.dataset.close === "true") closeModal();
+    });
+
+    // close esc
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && orderModal?.classList.contains("is-open")) closeModal();
+    });
+
+    // order
+
+    orderBtn?.addEventListener("click", () => {
+        if (Object.keys(basket).length === 0) {
+            alert("Dein Warenkorb ist leer!");
+            return;
+        }
+
+        // basket empty out
+
+        basket = {};
+        showBasket();
+
+        // show popupü
+
+        openModal();
+    });
 });
-
 
 // start !
 
 renderDishes();
 showBasket();
-
 
 
 
