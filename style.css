@@ -35,7 +35,6 @@ header {
     width: auto;
 }
 
-/* LAYOUT (Content + Basket) */
 .content-wrapper {
     display: flex;
     justify-content: center;
@@ -44,21 +43,17 @@ header {
     align-items: flex-start;
 }
 
-
-/* Linke Spalte: Content */
 .content-area {
     width: 100%;
     max-width: 1440px;
     position: relative;
 }
 
-/* Rechte Spalte: Basket */
 .basket-sticky {
     width: 300px;
     flex: 0 0 300px;
 }
 
-/* RESTAURANT / BANNER */
 .image-first img {
     width: 100%;
     height: 240px;
