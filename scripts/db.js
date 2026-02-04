@@ -46,5 +46,5 @@ const DISHES = [
     price: 3.99,
     category: "dessert"
   }
-  
+
 ];
